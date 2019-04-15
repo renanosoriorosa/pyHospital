@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %}
+    Especialidades
+{% endblock  %}
+
+{% block main %}
+    <div class="container" style="font-size:14px">
+        <h4>Especialidades</h4>
+        <div class="row">
+            <button class="btn btn-success" data-toggle="modal" data-target="#cadastro" style="font-size:14px;margin-left: 14px;">
+                Cadastrar
+            </button>
+            <div class="col-sm-12" style="margin-top:10px">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Especialidade</th>
+                            <th scope="col">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for especialidade in especialidades %}
+                            <tr>
+                                <th scope="row">
+                                    <a href="{% url 'edita_especialidade' especialidade.id %}">
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#editar" style="font-size:14px;margin-left: 14px;">
+                                            Editar 
+                                        </button>
+                                    </a>
+                                </th>
+                                <td>{{ especialidade.nome }}</td>
+                                <td>
+                                    <a href="" class="btn btn-danger" style="font-size:14px;">
+                                        Excluir
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL DE CADASTRO-->
+    <div class="modal fade" id="cadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Especialidade</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'cadastra_especialidade' %}" method="POST">
+                        {% csrf_token %} <!--importante contra ataques-->
+
+                        {{form | bootstrap}}
+
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIM MODAL DE CADASTRO-->
+
+{% endblock %}

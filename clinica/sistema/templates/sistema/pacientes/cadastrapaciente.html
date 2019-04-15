@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block scripts %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script type="text/javascript" src="{% static 'js/mascaras.js' %}"></script>
+{% endblock scripts %}
+
+{% block title %}
+    Cadastro de Paciente
+{% endblock  %}
+
+{% block main %}
+    <div class="container">
+        <h4>Cadastro de Paciente</h4>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                <form action="{% url 'cadastra_paciente' %}" method="POST">
+                    {% csrf_token %} <!--importante contra ataques-->
+
+                    {{form.nome | bootstrap}}
+                    {{form.cpf |add_class:"cpf" | bootstrap}}
+                    {{form.endereco | bootstrap}}
+                    {{form.telefone |add_class:"telefone" | bootstrap}}
+
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                    <a class="btn btn-danger" href="{% url 'lista_pacientes' %}">Cancelar</a>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+{% endblock %}

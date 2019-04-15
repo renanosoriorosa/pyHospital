@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+    Medicos
+{% endblock  %}
+
+{% block main %}
+    <div class="container" style="font-size:14px">
+        <h4>Medicos</h4>
+        <div class="row">
+            <a href="{% url 'cadastra_medico' %}" class="btn btn-success" style="font-size:14px;margin-left: 14px;">
+                Cadastrar
+            </a>
+            <div class="col-sm-12" style="margin-top:10px">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Editar</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Especialidade</th>
+                            <th scope="col">CPF</th>
+                            <th scope="col">endereco</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medico in medicos %}
+                            <tr>
+                                <th scope="row">
+                                    <a href="{% url 'edita_medico' medico.id %}" class="btn btn-primary" style="font-size:14px">
+                                        Editar
+                                    </a>
+                                </th>
+                                <td>{{ medico.nome }}</td>
+                                <td>{{ medico.especialidade }}</td>
+                                <td>{{ medico.cpf }}</td>
+                                <td>{{ medico.endereco }}</td>
+                                <td>{{ medico.telefone }}</td>
+                                <td>
+                                    <a href="{% url 'delete_medico' medico.id %}" class="btn btn-danger" style="font-size:14px">
+                                        Excluir
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

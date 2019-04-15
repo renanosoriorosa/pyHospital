@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Detetar
+{% endblock title %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 text-center">
+                <img src="{% static 'img/atencao.jpg' %}" width='200' alt="atencao"/>
+                <p>Tem certeza que deseja detetar {{obj}} ?</p>
+                <div class="d-flex justify-content-center">
+                    <form method="POST">
+                        {% csrf_token %} <!--importante contra ataques-->
+
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                        <a class="btn " href="{{ url }}">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+{% endblock main %}

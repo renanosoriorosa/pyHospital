@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Cadastro de Consultas
+{% endblock  %}
+
+{% block main %}
+    <div class="container">
+        <h4>Cadastro de Consultas</h4>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                <form action="{% url 'cadastra_consulta' %}" method="POST">
+                    {% csrf_token %} <!--importante contra ataques-->
+
+                    {{form.data | bootstrap}}
+                    {{form.medico | bootstrap}}
+                    {{form.paciente | bootstrap}}
+
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                    <a class="btn btn-danger" href="{% url 'lista_consultas' %}">Cancelar</a>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+{% endblock %}
