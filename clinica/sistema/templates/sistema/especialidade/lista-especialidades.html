@@ -33,7 +33,7 @@
                                 </th>
                                 <td>{{ especialidade.nome }}</td>
                                 <td>
-                                    <a href="" class="btn btn-danger" style="font-size:14px;">
+                                    <a href="{% url 'delete_especialidade' especialidade.id %}" class="btn btn-danger" style="font-size:14px;">
                                         Excluir
                                     </a>
                                 </td>

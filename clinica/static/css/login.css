@@ -38,11 +38,11 @@ body {
 
 @media screen and (min-width: 768px){
     .main{
-        margin-left: 40%; 
+        margin-left: 65%; 
     }
 
     .sidenav{
-        width: 40%;
+        width: 54%;
         position: fixed;
         z-index: 1;
         top: 0;

@@ -8,13 +8,17 @@ from .views import (
     listaEspecialidades,
     cadastraEspecialidade,
     editaEspecialidade,
+    deleteEspecialidade,
 
     listaPacientes,
     cadastraPaciente,
     editaPaciente,
     deletePaciente,
     listaConsultas,
-    cadastraConsulta
+
+    cadastraConsulta,
+    editaConsulta,
+    deleteConsulta
 )
 
 urlpatterns = [
@@ -22,6 +26,8 @@ urlpatterns = [
 
     path('consultas/', listaConsultas, name='lista_consultas'),
     path('cadastraconsulta/', cadastraConsulta, name='cadastra_consulta'),
+    path('editaconsulta/<int:id>/', editaConsulta, name='edita_consulta'),
+    path('deleteconsulta/<int:id>/', deleteConsulta, name='delete_consulta'),
 
     path('medicos/', listaMedicos, name='lista_medicos'),
     path('cadastramedico/', cadastraMedico, name='cadastra_medico'),
@@ -33,6 +39,8 @@ urlpatterns = [
         name='cadastra_especialidade'),
     path('editaespecialidade/<int:id>/', editaEspecialidade, 
         name='edita_especialidade'),
+    path('deleteespecialidade/<int:id>/', deleteEspecialidade, 
+        name='delete_especialidade'),
     
     path('pacientes/', listaPacientes, name='lista_pacientes'),
     path('cadastrapaciente/', cadastraPaciente, name='cadastra_paciente'),

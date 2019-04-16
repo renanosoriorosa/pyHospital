@@ -33,10 +33,10 @@
         <div class="login-main-text">
         </div>
     </div>
-    <div class="main" style="margin-top:10%">
+    <div class="main" style="margin-top:4%">
         <div class="col-md-6 col-sm-12">
-            <div class="">
-                <h4 class="text-center">Hospital System</h4>
+            <div>
+                <img src="{% static 'img/logo.jpg' %}" class="mx-auto d-block" width='200' alt="atencao"/>
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
                     <div class="form-group">
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         {{ form.password |add_class:"form-control" |bootstrap}}
                     </div>
-                    <button type="submit" class="btn btn-success">Login</button>
+                    <button type="submit" class="btn btn-success" style="width:100%">Login</button>
                 </form>
                 <br>
                 <p><a href="{% url 'password_reset' %}">Esqueceu a senha?</a></p>

@@ -31,6 +31,34 @@ def cadastraConsulta(request):
         return redirect('lista_consultas')
     return render(request,'sistema/consultas/cadastraconsulta.html',data)
 
+
+@login_required()
+def editaConsulta(request, id):
+	data = {}
+	consulta = Consulta.objects.get(id=id) #pega a pessoa que vai se editada
+	form = ConsultaForm(request.POST or None, instance = consulta) # inicia um formulario com os campos preenchidos
+	data['consulta'] = consulta
+	data['form'] = form
+
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			return redirect('lista_consultas')
+	else:
+		return render(request, 'sistema/consultas/editaconsulta.html', data)
+
+
+@login_required()
+def deleteConsulta(request, id):
+	consulta = Consulta.objects.get(id=id)
+	if request.method == 'POST':
+		consulta.delete()
+		return redirect('lista_consultas')
+	else:
+		return render(request, 'sistema/deleteconfirm.html', 
+            {'obj': consulta, 'url': "/consultas/"})
+
+
 #medicos
 @login_required()
 def listaMedicos(request):
@@ -109,6 +137,17 @@ def editaEspecialidade(request, id):
 			return redirect('lista_especialidades')
 	else:
 		return render(request, 'sistema/especialidade/editaespecialidade.html', data)
+
+
+@login_required()
+def deleteEspecialidade(request, id):
+	especialidade = Especialidade.objects.get(id=id)
+	if request.method == 'POST':
+		especialidade.delete()
+		return redirect('lista_especialidades')
+	else:
+		return render(request, 'sistema/deleteconfirm.html', 
+            {'obj': especialidade, 'url': "/especialidades/"})
 
 
 @login_required()

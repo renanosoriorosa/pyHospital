@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block title %}
+    Editar Consulta 
+{% endblock  %}
+
+{% block main %}
+    <div class="container">
+        <h4>Editar Consulta {{ consulta }}</h4>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
+                <form action="{% url 'edita_consulta' consulta.id %}" method="POST">
+                    {% csrf_token %} <!--importante contra ataques-->
+
+                    {{form.data | bootstrap}}
+                    {{form.medico | bootstrap}}
+                    {{form.paciente | bootstrap}}
+
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <a class="btn btn-danger" href="{% url 'lista_consultas' %}">Cancelar</a>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+{% endblock %}

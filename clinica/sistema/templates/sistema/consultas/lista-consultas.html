@@ -25,7 +25,7 @@
                         {% for consulta in consultas %}
                             <tr>
                                 <th scope="row">
-                                    <a href="" class="btn btn-primary" style="font-size:14px">
+                                    <a href="{% url 'edita_consulta' consulta.id %}" class="btn btn-primary" style="font-size:14px">
                                         Editar
                                     </a>
                                 </th>
@@ -33,7 +33,7 @@
                                 <td>{{ consulta.medico }}</td>
                                 <td>{{ consulta.paciente }}</td>
                                 <td>
-                                    <a href="" class="btn btn-danger" style="font-size:14px">
+                                    <a href="{% url 'delete_consulta' consulta.id %}" class="btn btn-danger" style="font-size:14px">
                                         Excluir
                                     </a>
                                 </td>
