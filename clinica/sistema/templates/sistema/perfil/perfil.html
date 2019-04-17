@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="container">
+        <h3>Meu Perfil</h3>
+        <div class="row">
+            <div class="col-sm-6">
+                <p><strong>Usuário:</strong> {{user}}</p>
+                <p><strong>Nome:</strong> {{user.first_name}}</p>
+                <p><strong>Sobrenome:</strong> {{user.last_name}}</p>
+                <p><strong>Email:</strong> {{user.email}}</p>
+            </div>
+            <div class="col-sm-6">
+                Foto Perfil
+                <br>
+                (futuro)
+            </div>
+        </div>
+        <a href="{% url 'edita_perfil' %}" class="btn btn-primary">Editar</a>
+    </div>
+{% endblock main %}

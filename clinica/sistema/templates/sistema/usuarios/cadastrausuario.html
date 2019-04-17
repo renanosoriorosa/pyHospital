@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load bootstrap %}
+
+{% block main %}
+    <div class="container">
+        <h5>Cadastro de Usuário</h5>
+        <div class="row">
+            <div class="col-sm-6">
+                <form method='post'>  
+                    {% csrf_token %}
+                    {{form | bootstrap}}
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    
+{% endblock main %}

@@ -18,11 +18,21 @@ from .views import (
 
     cadastraConsulta,
     editaConsulta,
-    deleteConsulta
+    deleteConsulta,
+
+    listaPerfil,
+    editaPerfil,
+    
+    cadastraUsuario
 )
 
 urlpatterns = [
     path('', listaConsultas, name='lista_consultas'),
+
+    path('perfil/', listaPerfil, name='lista_perfil'),
+    path('perfil/editar/', editaPerfil, name='edita_perfil'),
+
+    path('cadastrausuario/', cadastraUsuario, name='cadastra_usuario'),
 
     path('consultas/', listaConsultas, name='lista_consultas'),
     path('cadastraconsulta/', cadastraConsulta, name='cadastra_consulta'),

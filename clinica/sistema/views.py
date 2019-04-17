@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.template.loader import render_to_string
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import(
     Medico,
@@ -12,7 +12,9 @@ from .forms import (
     MedicoForm,
     EspecialidadeForm,
     PacienteForm,
-    ConsultaForm
+    ConsultaForm,
+	EditarPerfilForm,
+	CadastraUsuarioForm
 )
 # Create your views here.
 @login_required()
@@ -195,3 +197,39 @@ def deletePaciente(request, id):
 	else:
 		return render(request, 'sistema/deleteconfirm.html', 
             {'obj': paciente, 'url': "/pacientes/"})
+
+
+#MEU PERFIL
+@login_required()
+def listaPerfil(request):
+	args = {'user': request.user}
+	return render(request, 'sistema/perfil/perfil.html', args)
+
+
+
+@login_required()
+def editaPerfil(request):
+	if request.method == 'POST':
+		form = EditarPerfilForm(request.POST, instance=request.user)
+	
+		if form.is_valid():
+			form.save()
+			return redirect('lista_perfil')
+	
+	else:
+		form = EditarPerfilForm(instance=request.user)
+		args = {'form': form}
+		return render(request, 'sistema/perfil/editaperfil.html', args)
+
+
+#cadastra usuario
+def cadastraUsuario(request):
+	if request.method == 'POST':
+		form = CadastraUsuarioForm(request.POST, instance=request.user)
+		if form.is_valid():
+			form.save()
+			return redirect('lista_consultas')
+	else:
+		form = CadastraUsuarioForm()
+		args = {'form':form}
+		return render(request, 'sistema/usuarios/cadastrausuario.html', args)
