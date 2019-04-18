@@ -23,7 +23,8 @@ from .views import (
     listaPerfil,
     editaPerfil,
     
-    cadastraUsuario
+    cadastraUsuario,
+    cadastraUsuarioSucesso
 )
 
 urlpatterns = [
@@ -33,6 +34,7 @@ urlpatterns = [
     path('perfil/editar/', editaPerfil, name='edita_perfil'),
 
     path('cadastrausuario/', cadastraUsuario, name='cadastra_usuario'),
+    path('cadastra-usuario-sucesso/', cadastraUsuarioSucesso, name='cadastra_usuario_sucesso'),
 
     path('consultas/', listaConsultas, name='lista_consultas'),
     path('cadastraconsulta/', cadastraConsulta, name='cadastra_consulta'),

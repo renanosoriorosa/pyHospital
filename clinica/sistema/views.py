@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from .models import(
     Medico,
     Especialidade,
@@ -118,15 +119,17 @@ def listaEspecialidades(request):
 
 @login_required()
 def cadastraEspecialidade(request):
-    form = EspecialidadeForm(request.POST or None)
-    data = {'form':form}
-    if form.is_valid():
-        form.save()
-        return redirect('lista_especialidades')
+	form = EspecialidadeForm(request.POST or None)
+	data = {'form':form}
+	if form.is_valid():
+		form.save()
+		return redirect('lista_especialidades')
 
 
 @login_required()
 def editaEspecialidade(request, id):
+	if not request.user.has_perm('especialidade.change_especialidade'):
+		return HttpResponse('Sem Permissão')
 	data = {}
 	especialidade = Especialidade.objects.get(id=id) #pega a pessoa que vai se editada
 	form = EspecialidadeForm(request.POST or None, instance = especialidade) # inicia um formulario com os campos preenchidos
@@ -223,13 +226,21 @@ def editaPerfil(request):
 
 
 #cadastra usuario
+@login_required()
 def cadastraUsuario(request):
+	if not request.user.has_perm('usuario.view_user'):
+		return HttpResponse('Sem Permissão')
 	if request.method == 'POST':
-		form = CadastraUsuarioForm(request.POST, instance=request.user)
+		form = CadastraUsuarioForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('lista_consultas')
+			return redirect('cadastra_usuario_sucesso')
 	else:
 		form = CadastraUsuarioForm()
 		args = {'form':form}
 		return render(request, 'sistema/usuarios/cadastrausuario.html', args)
+
+
+@login_required()
+def cadastraUsuarioSucesso(request):
+	return render(request, 'sistema/usuarios/cadastro-usuario-sucesso.html')
