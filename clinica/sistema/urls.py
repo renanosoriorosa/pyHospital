@@ -24,11 +24,15 @@ from .views import (
     editaPerfil,
     
     cadastraUsuario,
-    cadastraUsuarioSucesso
+    cadastraUsuarioSucesso,
+    
+    semPermissao
 )
 
 urlpatterns = [
     path('', listaConsultas, name='lista_consultas'),
+
+    path('sem-permissao/', semPermissao, name='sem_permissao'),
 
     path('perfil/', listaPerfil, name='lista_perfil'),
     path('perfil/editar/', editaPerfil, name='edita_perfil'),

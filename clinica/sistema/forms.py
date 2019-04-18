@@ -12,6 +12,13 @@ from .views import (
 class ConsultaForm(ModelForm):
     class Meta:
         model = Consulta
+        data = forms.DateTimeField(
+            input_formats=['%d/%m/%Y %H:%M'],
+            widget=forms.DateTimeInput(attrs={
+                'class': 'form-control datetimepicker-input',
+                'data-target': '#datetimepicker1'
+            })
+        )
         fields = '__all__' #todos os campos dos medicos
 
 class MedicoForm(ModelForm):

@@ -128,8 +128,8 @@ def cadastraEspecialidade(request):
 
 @login_required()
 def editaEspecialidade(request, id):
-	if not request.user.has_perm('especialidade.change_especialidade'):
-		return HttpResponse('Sem Permissão')
+	if not request.user.has_perm('usuario.view_user'):
+		return redirect('sem_permissao')
 	data = {}
 	especialidade = Especialidade.objects.get(id=id) #pega a pessoa que vai se editada
 	form = EspecialidadeForm(request.POST or None, instance = especialidade) # inicia um formulario com os campos preenchidos
@@ -229,7 +229,7 @@ def editaPerfil(request):
 @login_required()
 def cadastraUsuario(request):
 	if not request.user.has_perm('usuario.view_user'):
-		return HttpResponse('Sem Permissão')
+		return redirect('sem_permissao')
 	if request.method == 'POST':
 		form = CadastraUsuarioForm(request.POST)
 		if form.is_valid():
@@ -244,3 +244,8 @@ def cadastraUsuario(request):
 @login_required()
 def cadastraUsuarioSucesso(request):
 	return render(request, 'sistema/usuarios/cadastro-usuario-sucesso.html')
+
+
+@login_required()
+def semPermissao(request):
+	return render(request, 'sistema/sem-permissao.html')
