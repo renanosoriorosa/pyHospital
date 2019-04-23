@@ -12,12 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/double-bounce.css' %}">
     <title>Login</title>
 </head>
 <body>
-
+    <!-- VERIFICAR NO FURUTO ESSAS ENSAGENS  
     {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
+        <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
 
     {% if next %}
@@ -28,31 +29,52 @@
         <p>Please login to see this page.</p>
         {% endif %}
     {% endif %}
-    
-    <div class="sidenav">
-        <div class="login-main-text">
+    -->
+    <div id="principal" >
+        <div class="sidenav">
+            <div class="login-main-text">
+            </div>
         </div>
-    </div>
-    <div class="main" style="margin-top:4%">
-        <div class="col-md-6 col-sm-12">
-            <div>
-                <img src="{% static 'img/logo.jpg' %}" class="mx-auto d-block" width='200' alt="atencao"/>
-                <form method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        {{ form.username |add_class:"form-control" |bootstrap}}
-                    </div>
-                    <div class="form-group">
-                        {{ form.password |add_class:"form-control" |bootstrap}}
-                    </div>
-                    <button type="submit" class="btn btn-success" style="width:100%">Login</button>
-                </form>
-                <br>
-                <p><a href="{% url 'password_reset' %}">Esqueceu a senha?</a></p>
+        <div class="main" style="margin-top:4%">
+            <div class="col-md-6 col-sm-12">
+                <div>
+                    <img src="{% static 'img/logo.jpg' %}" class="mx-auto d-block" width='200' alt="atencao"/>
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.username |add_class:"form-control" |bootstrap}}
+                        </div>
+                        <div class="form-group">
+                            {{ form.password |add_class:"form-control" |bootstrap}}
+                        </div>
+                        <button type="submit" class="btn btn-success" onclick="exibe('load','principal');" style="width:100%">Login</button>
+                    </form>
+                    <br>
+                    <p><a href="{% url 'password_reset' %}">Esqueceu a senha?</a></p>
+                </div>
             </div>
         </div>
     </div>
+    <div class="container" id="load" style="display:none">
+        <div class="spinner" >
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
 </body>
+<script>
+    function exibe(load, principal) {
+        if (document.getElementById(load).style.display == "none") {
+            document.body.style.backgroundColor = "#00bcd4";
+            document.getElementById(load).style.display = "flex";
+            document.getElementById(principal).style.display = "none";
+        } else {
+            document.getElementById(load).style.display = "none";
+            document.getElementById(principal).style.display = "block";
+            document.body.style.backgroundColor = "#fff";
+        }
+    }
+</script>
 </html>
 
 
